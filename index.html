@@ -1,45 +1,4 @@
-<style>
-  .code{
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    font-size: 25px;
-    margin: 0px 5px;
-    border:0px;
-    border-bottom: 1px solid black;
-  }
-  .code:focus, .code:focus-visible{
-    outline: 0px;
-    color: #EF3A3A;
-    border-color:#EF3A3A !important;
-  }
-  .card{
-    width: 300px;
-    padding: 10px 20px;
-    text-align: center;
-  }
-  ::placeholder{
-    color:#f5f5f5;
-  }
-  ::-moz-placeholder{
-    color:#f5f5f5;
-  }
-  ::-webkit-input-placeholder{
-    color:#f5f5f5;
-  }
-  .resend-otp{
-    margin-top:20px;
-  }
-  .resend-otp a{
-    cursor: not-allowed; 
-    font-weight:700;
-    color:#EF3A3A;
-  }
-  #timer{
-    color:#EF3A3A;
-  }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 
 <div class="card">
   <input autocomplete="off" class="code" type="text" onclick="this.value = ''" oninput="onlyNumbers(this)" onkeyup="nextInput(1)" maxlength="1" name="code[]" placeholder="..." />
@@ -55,45 +14,4 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-  function onlyNumbers(input){
-    input.value = input.value.replace(/[^0-9]/g,'');
-  }
-  function nextInput(val){
-    var input = document.getElementsByClassName('code');
-    try {
-      if(input[val-1].value != ''){
-        input[val].focus();
-      }
-    } catch (error) {
-        
-    }
-  }
-  var time;
-  function resetTimer() {
-    var timer = $('#timer');
-    var actionTimer = $('#actionTimer');
-    if(!time){
-      time = 10;
-    }
-    actionTimer.css({'cursor': 'not-allowed', 'color': '#EF3A3A'}).attr('onclick', false);
-    timer.text(`(${time}s)`);
-    var intervalTimer = setInterval(function () {
-      time -= 1;
-      timer.text(`(${time}s)`);
-      if(time < 1){
-        clearInterval(intervalTimer);
-        timer.text('');
-        actionTimer.css({'cursor': 'pointer', 'color': '#009688'}).attr('onclick', 'resendToken()');
-      }
-    }, 1000);
-  }
-  resetTimer();
-
-  function resendToken() {
-    time = 11;
-    resetTimer();
-    // function send OTP here
-    alert('resend OTP success');
-  }
-</script>
+<script type="text/javascript" src="script.js"></script>
